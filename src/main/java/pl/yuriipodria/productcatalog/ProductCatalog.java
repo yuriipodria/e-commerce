@@ -1,20 +1,18 @@
 package pl.yuriipodria.productcatalog;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
 public class ProductCatalog {
-    private final List<Product> products;
+    ProductRepository productRepository;
 
-    public ProductCatalog() {
-        this.products = new ArrayList<>();
+    public ProductCatalog(ProductRepository productRepository) {
+        this.productRepository = productRepository;
     }
 
     public List<Product> allProducts() {
-        return Collections.unmodifiableList(products);
+        return this.productRepository.allProducts();
     }
 
     public String createProduct(String name, String description) {
@@ -26,20 +24,23 @@ public class ProductCatalog {
                 description
         );
 
-        products.add(newProduct);
+        productRepository.save(newProduct);
 
         return newProduct.getId();
     }
 
     public Product loadProductById(String id) {
-        return products.stream()
-                .filter(product -> product.getId().equals(id))
-                .findFirst()
-                .get();
+        return productRepository.loadProductById(id);
     }
 
     public void changePrice(String id, BigDecimal newPrice) {
         var product = loadProductById(id);
         product.changePrice(newPrice);
+    }
+
+    public void changeImage(String id, String image) {
+        var loadedProduct = this.loadProductById(id);
+
+        loadedProduct.changeImage(image);
     }
 }

@@ -9,7 +9,8 @@ public class ProductCatalogTests {
 
     @Test
     void itAllowsToListProducts() {
-        ProductCatalog catalog = new ProductCatalog();
+        ArrayListProductRepository arrayListProductsStorage = new ArrayListProductRepository();
+        ProductCatalog catalog = new ProductCatalog(arrayListProductsStorage);
         List<Product> products = catalog.allProducts();
 
         assertTrue(products.isEmpty());
@@ -17,7 +18,8 @@ public class ProductCatalogTests {
 
     @Test
     void itAllowsToAddProducts() {
-        ProductCatalog catalog = new ProductCatalog();
+        ArrayListProductRepository arrayListProductsStorage = new ArrayListProductRepository();
+        ProductCatalog catalog = new ProductCatalog(arrayListProductsStorage);
         catalog.createProduct("Lego  set 83", "nice one");
         List<Product> products = catalog.allProducts();
 
@@ -26,7 +28,8 @@ public class ProductCatalogTests {
 
     @Test
     void catalogIdentifiesProductsWithUniqueIds() {
-        ProductCatalog catalog = new ProductCatalog();
+        ArrayListProductRepository arrayListProductsStorage = new ArrayListProductRepository();
+        ProductCatalog catalog = new ProductCatalog(arrayListProductsStorage);
         String productId1 = catalog.createProduct("Lego  set 885483", "nice one");
         String productId2 = catalog.createProduct("Lego  set 8883", "nice one");
 
@@ -35,7 +38,8 @@ public class ProductCatalogTests {
 
     @Test
     void itAllowsToLoadProductById() {
-        ProductCatalog catalog = new ProductCatalog();
+        ArrayListProductRepository arrayListProductsStorage = new ArrayListProductRepository();
+        ProductCatalog catalog = new ProductCatalog(arrayListProductsStorage);
         String productId = catalog.createProduct("lego set 123", "aaa");
 
         Product loadedProduct = catalog.loadProductById(productId);
@@ -47,7 +51,8 @@ public class ProductCatalogTests {
 
     @Test
     void itAllowsToChangePrice() {
-        ProductCatalog catalog = new ProductCatalog();
+        ArrayListProductRepository arrayListProductsStorage = new ArrayListProductRepository();
+        ProductCatalog catalog = new ProductCatalog(arrayListProductsStorage);
         String productId = catalog.createProduct("lego set 123", "aaa");
 
         catalog.changePrice(productId, BigDecimal.valueOf(100.10));
@@ -58,7 +63,8 @@ public class ProductCatalogTests {
 
     @Test
     void priceCantBeLowerThanZero() {
-        ProductCatalog catalog = new ProductCatalog();
+        ArrayListProductRepository arrayListProductsStorage = new ArrayListProductRepository();
+        ProductCatalog catalog = new ProductCatalog(arrayListProductsStorage);
         String productId = catalog.createProduct("lego set 123", "aaa");
 
         assertThrows(
@@ -69,7 +75,8 @@ public class ProductCatalogTests {
 
     @Test
     void itAllowsToChangeImage() {
-        ProductCatalog catalog = new ProductCatalog();
+        ArrayListProductRepository arrayListProductsStorage = new ArrayListProductRepository();
+        ProductCatalog catalog = new ProductCatalog(arrayListProductsStorage);
         String productId = catalog.createProduct("lego set 123", "aaa");
 
         catalog.changeImage(productId, "https://placehold.co/600x400");
