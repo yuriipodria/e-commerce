@@ -3,6 +3,7 @@ package pl.yuriipodria.productcatalog;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -17,6 +18,14 @@ public class HashMapProductRepositoryTest {
 
         assertEquals(product.getId(), loaded.getId());
         assertEquals(product.getDescription(), loaded.getDescription());
+    }
+
+    private ProductRepository thereIsProductRepository() {
+        return new ArrayListProductRepository();
+    }
+
+    private Product thereIsProduct() {
+        return new Product(UUID.randomUUID(), "fdsafds", "fas");
     }
 
     @Test
