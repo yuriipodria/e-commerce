@@ -2,8 +2,8 @@ package pl.yuriipodria.ecommerce;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.yuriipodria.productcatalog.Product;
-import pl.yuriipodria.productcatalog.ProductCatalog;
+import pl.yuriipodria.ecommerce.productcatalog.Product;
+import pl.yuriipodria.ecommerce.productcatalog.ProductCatalog;
 
 import java.util.List;
 

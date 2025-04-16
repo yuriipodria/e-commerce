@@ -1,4 +1,4 @@
-package pl.yuriipodria.productcatalog;
+package pl.yuriipodria.ecommerce.productcatalog;
 
 import java.math.BigDecimal;
 import java.util.List;

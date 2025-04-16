@@ -1,4 +1,4 @@
-package pl.yuriipodria.productcatalog;
+package pl.yuriipodria.ecommerce.productcatalog;
 
 import java.util.List;
 
