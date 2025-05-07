@@ -1,9 +1,5 @@
 package pl.yuriipodria.ecommerce.productcatalog;
 import org.junit.jupiter.api.Test;
-import pl.yuriipodria.ecommerce.productcatalog.ArrayListProductRepository;
-import pl.yuriipodria.ecommerce.productcatalog.InvalidProductPriceException;
-import pl.yuriipodria.ecommerce.productcatalog.Product;
-import pl.yuriipodria.ecommerce.productcatalog.ProductCatalog;
 
 import static org.junit.jupiter.api.Assertions.*;
 
