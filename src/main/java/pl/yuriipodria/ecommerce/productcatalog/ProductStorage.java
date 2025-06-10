@@ -2,7 +2,7 @@ package pl.yuriipodria.ecommerce.productcatalog;
 
 import java.util.List;
 
-public interface ProductRepository {
+public interface ProductStorage {
     List<Product> allProducts();
 
     void save(Product newProduct);

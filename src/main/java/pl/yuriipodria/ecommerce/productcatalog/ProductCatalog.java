@@ -5,14 +5,14 @@ import java.util.List;
 import java.util.UUID;
 
 public class ProductCatalog {
-    ProductRepository productRepository;
+    private final ProductStorage productStorage;
 
-    public ProductCatalog(ProductRepository productRepository) {
-        this.productRepository = productRepository;
+    public ProductCatalog(ProductStorage productStorage) {
+        this.productStorage = productStorage;
     }
 
     public List<Product> allProducts() {
-        return this.productRepository.allProducts();
+        return this.productStorage.allProducts();
     }
 
     public String createProduct(String name, String description) {
@@ -24,17 +24,18 @@ public class ProductCatalog {
                 description
         );
 
-        productRepository.save(newProduct);
+        productStorage.save(newProduct);
 
         return newProduct.getId();
     }
 
     public Product loadProductById(String id) {
-        return productRepository.loadProductById(id);
+        return productStorage.loadProductById(id);
     }
 
     public void changePrice(String id, BigDecimal newPrice) {
         var product = loadProductById(id);
+
         product.changePrice(newPrice);
     }
 

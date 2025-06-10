@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import pl.yuriipodria.ecommerce.productcatalog.DbProductRepository;
+import pl.yuriipodria.ecommerce.productcatalog.SqlProductStorage;
 import pl.yuriipodria.ecommerce.productcatalog.Product;
-import pl.yuriipodria.ecommerce.productcatalog.ProductRepository;
+import pl.yuriipodria.ecommerce.productcatalog.ProductStorage;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.UUID;
 
 @SpringBootTest
-public class DatabaseProductRepositoryTest {
+public class SqlProductStorageTest {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
@@ -48,9 +48,30 @@ public class DatabaseProductRepositoryTest {
     }
 
     @Test
+    void itCreatesTable() {
+        jdbcTemplate.execute("DROP TABLE `product_catalog__products` IF EXISTS");
+
+        var sql = """
+            CREATE TABLE `product_catalog__products` (
+                id VARCHAR(100) NOT NULL,
+                name VARCHAR(100) NOT NULL,
+                description VARCHAR(100) NOT NULL,
+                price DECIMAL(12,2),
+                cover VARCHAR(100),
+                PRIMARY KEY(id)
+            );
+        """;
+        jdbcTemplate.execute(sql);
+
+        var result = jdbcTemplate.queryForObject("Select count(*) from `product_catalog__products`", Integer.class);
+
+        assertThat(result).isEqualTo(0);
+    }
+
+    @Test
     void itStoresAndLoadsProducts() {
         Product product = thereIsProduct();
-        ProductRepository repository = thereIsRepository();
+        ProductStorage repository = thereIsRepository();
 
         repository.save(product);
         Product loaded = repository.loadProductById(product.getId());
@@ -132,8 +153,8 @@ public class DatabaseProductRepositoryTest {
         assert result == 1;
     }
 
-    private ProductRepository thereIsRepository() {
-        return new DbProductRepository(jdbcTemplate);
+    private ProductStorage thereIsRepository() {
+        return new SqlProductStorage(jdbcTemplate);
     }
 
     private Product thereIsProduct() {

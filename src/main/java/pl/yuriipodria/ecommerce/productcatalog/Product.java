@@ -4,32 +4,32 @@ import java.math.BigDecimal;
 import java.util.UUID;
 
 public class Product {
-    private final UUID id;
+    private final String id;
     private final String name;
     private final String description;
     private BigDecimal price;
     private String image;
 
     public Product(UUID id, String name, String description) {
-        this.id = id;
+        this.id = id.toString();
         this.name = name;
         this.description = description;
     }
 
     public String getId() {
-        return id.toString();
+        return this.id;
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public String getDescription() {
-        return description;
+        return this.description;
     }
 
     public BigDecimal getPrice() {
-        return price;
+        return this.price;
     }
 
     public String getImage() {

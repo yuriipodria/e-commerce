@@ -5,10 +5,10 @@ import java.math.BigDecimal;
 public class CreditCard {
     public static final int CREDIT_THRESHOLD = 100;
     private final String cardNumber;
-    private BigDecimal initialCredit;
+    private BigDecimal creditLimit;
     private BigDecimal balance;
 
-    public CreditCard(String cardNumber ) {
+    public CreditCard(String cardNumber) {
         this.cardNumber = cardNumber;
     }
 
@@ -16,19 +16,19 @@ public class CreditCard {
         return cardNumber;
     }
     
-    public BigDecimal getInitialCredit() { return initialCredit; }
+    public BigDecimal getCreditLimit() { return creditLimit; }
 
-    public void assignCredit(BigDecimal initialCredit) {
-        if (isCreditBelowThreshold(initialCredit)) {
+    public void assignCredit(BigDecimal creditLimit) {
+        if (isCreditBelowThreshold(creditLimit)) {
             throw new CreditBelowThresholdException();
         }
 
-        if (this.initialCredit != null) {
+        if (this.creditLimit != null) {
             throw new CreditCantBeAssignedTwiceException();
         }
 
-        this.initialCredit = initialCredit;
-        this.balance = initialCredit;
+        this.creditLimit = creditLimit;
+        this.balance = creditLimit;
     }
 
     private static boolean isCreditBelowThreshold(BigDecimal credit) {
@@ -40,7 +40,7 @@ public class CreditCard {
     }
 
     public void withdraw(BigDecimal money) {
-        if (canAfford(money)) {
+        if (!canAfford(money)) {
             throw new NotEnoughMoneyException();
         }
 

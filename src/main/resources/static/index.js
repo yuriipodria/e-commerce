@@ -6,6 +6,7 @@ function getProducts() {
 function createProductHtml(productData) {
     const template = `
         <h4>${productData.name}</h4>
+        <img src="https://picsum.photos/id/237/200/300" />
         <p>${productData.description}</p>
         <p>${productData.price}</p>
         <button data-id="${productData.id}">Add to cart</button>
@@ -19,8 +20,8 @@ function createProductHtml(productData) {
     return liElement;
 }
 
-(function() {
-    const productList = document.querySelector('.productList');
+(async () => {
+    const productList = document.querySelector('#productList');
 
     getProducts()
         .then(products => products.map(createProductHtml))

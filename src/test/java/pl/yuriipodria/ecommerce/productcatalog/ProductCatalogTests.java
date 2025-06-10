@@ -7,11 +7,10 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public class ProductCatalogTests {
-
     @Test
     void itAllowsToListProducts() {
-        ArrayListProductRepository arrayListProductsStorage = new ArrayListProductRepository();
-        ProductCatalog catalog = new ProductCatalog(arrayListProductsStorage);
+        ArrayListProductStorage arrayListProductStorage = new ArrayListProductStorage();
+        ProductCatalog catalog = new ProductCatalog(arrayListProductStorage);
         List<Product> products = catalog.allProducts();
 
         assertTrue(products.isEmpty());
@@ -19,8 +18,8 @@ public class ProductCatalogTests {
 
     @Test
     void itAllowsToAddProducts() {
-        ArrayListProductRepository arrayListProductsStorage = new ArrayListProductRepository();
-        ProductCatalog catalog = new ProductCatalog(arrayListProductsStorage);
+        ArrayListProductStorage arrayListProductStorage = new ArrayListProductStorage();
+        ProductCatalog catalog = new ProductCatalog(arrayListProductStorage);
         catalog.createProduct("Lego  set 83", "nice one");
         List<Product> products = catalog.allProducts();
 
@@ -29,8 +28,8 @@ public class ProductCatalogTests {
 
     @Test
     void catalogIdentifiesProductsWithUniqueIds() {
-        ArrayListProductRepository arrayListProductsStorage = new ArrayListProductRepository();
-        ProductCatalog catalog = new ProductCatalog(arrayListProductsStorage);
+        ArrayListProductStorage arrayListProductStorage = new ArrayListProductStorage();
+        ProductCatalog catalog = new ProductCatalog(arrayListProductStorage);
         String productId1 = catalog.createProduct("Lego  set 885483", "nice one");
         String productId2 = catalog.createProduct("Lego  set 8883", "nice one");
 
@@ -39,8 +38,8 @@ public class ProductCatalogTests {
 
     @Test
     void itAllowsToLoadProductById() {
-        ArrayListProductRepository arrayListProductsStorage = new ArrayListProductRepository();
-        ProductCatalog catalog = new ProductCatalog(arrayListProductsStorage);
+        ArrayListProductStorage arrayListProductStorage = new ArrayListProductStorage();
+        ProductCatalog catalog = new ProductCatalog(arrayListProductStorage);
         String productId = catalog.createProduct("lego set 123", "aaa");
 
         Product loadedProduct = catalog.loadProductById(productId);
@@ -52,8 +51,8 @@ public class ProductCatalogTests {
 
     @Test
     void itAllowsToChangePrice() {
-        ArrayListProductRepository arrayListProductsStorage = new ArrayListProductRepository();
-        ProductCatalog catalog = new ProductCatalog(arrayListProductsStorage);
+        ArrayListProductStorage arrayListProductStorage = new ArrayListProductStorage();
+        ProductCatalog catalog = new ProductCatalog(arrayListProductStorage);
         String productId = catalog.createProduct("lego set 123", "aaa");
 
         catalog.changePrice(productId, BigDecimal.valueOf(100.10));
@@ -64,8 +63,8 @@ public class ProductCatalogTests {
 
     @Test
     void priceCantBeLowerThanZero() {
-        ArrayListProductRepository arrayListProductsStorage = new ArrayListProductRepository();
-        ProductCatalog catalog = new ProductCatalog(arrayListProductsStorage);
+        ArrayListProductStorage arrayListProductStorage = new ArrayListProductStorage();
+        ProductCatalog catalog = new ProductCatalog(arrayListProductStorage);
         String productId = catalog.createProduct("lego set 123", "aaa");
 
         assertThrows(
@@ -76,8 +75,8 @@ public class ProductCatalogTests {
 
     @Test
     void itAllowsToChangeImage() {
-        ArrayListProductRepository arrayListProductsStorage = new ArrayListProductRepository();
-        ProductCatalog catalog = new ProductCatalog(arrayListProductsStorage);
+        ArrayListProductStorage arrayListProductStorage = new ArrayListProductStorage();
+        ProductCatalog catalog = new ProductCatalog(arrayListProductStorage);
         String productId = catalog.createProduct("lego set 123", "aaa");
 
         catalog.changeImage(productId, "https://placehold.co/600x400");

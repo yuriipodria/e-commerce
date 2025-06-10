@@ -5,10 +5,11 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import java.util.*;
 
-public class DbProductRepository implements ProductRepository {
-    private JdbcTemplate jdbcTemplate;
+public class SqlProductStorage implements ProductStorage {
 
-    public DbProductRepository(JdbcTemplate jdbcTemplate) {
+    private final JdbcTemplate jdbcTemplate;
+
+    public SqlProductStorage(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
@@ -23,6 +24,8 @@ public class DbProductRepository implements ProductRepository {
                             rs.getString("DESCRIPTION")
                     );
 
+                    product.changePrice(rs.getBigDecimal("PRICE"));
+
                     return product;
                 }
         );
@@ -33,15 +36,16 @@ public class DbProductRepository implements ProductRepository {
     @Override
     public void save(Product newProduct) {
         var sql = """
-                INSERT INTO `product_catalog__products` (id, name, description)
+                INSERT INTO `product_catalog__products` (id, name, description, price)
                 VALUES
-                    (:id, :name, :desc);
+                    (:id, :name, :desc, :price);
                 """;
 
         Map<String, Object> params = new HashMap<>();
         params.put("id", newProduct.getId());
         params.put("name", newProduct.getName());
         params.put("desc", newProduct.getDescription());
+        params.put("price", product.getPrice());
 
         var namedJdbcTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);
         namedJdbcTemplate.update(sql, params);
@@ -59,7 +63,9 @@ public class DbProductRepository implements ProductRepository {
                             rs.getString("DESCRIPTION")
                     );
 
-                    return  product;
+                    product.changePrice(rs.getBigDecimal("PRICE"));
+
+                    return product;
                 }
         );
 

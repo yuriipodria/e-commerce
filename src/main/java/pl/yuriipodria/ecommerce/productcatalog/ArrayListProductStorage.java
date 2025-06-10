@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ArrayListProductRepository implements ProductRepository {
-    private final List<Product> products;
+public class ArrayListProductStorage implements ProductStorage {
+    private final ArrayList<Product> products;
 
-    public ArrayListProductRepository() {
+    public ArrayListProductStorage() {
         this.products = new ArrayList<>();
     }
 
