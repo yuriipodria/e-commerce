@@ -45,7 +45,7 @@ public class SqlProductStorage implements ProductStorage {
         params.put("id", newProduct.getId());
         params.put("name", newProduct.getName());
         params.put("desc", newProduct.getDescription());
-        params.put("price", product.getPrice());
+        params.put("price", newProduct.getPrice());
 
         var namedJdbcTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);
         namedJdbcTemplate.update(sql, params);

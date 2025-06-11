@@ -17,12 +17,12 @@ public class HashMapProductStorage implements ProductStorage {
     }
 
     @Override
-    public void add(Product product) {
+    public void save(Product product) {
         productHashMap.put(product.getId(), product);
     }
 
     @Override
-    public Product getProductBy(String id) {
+    public Product loadProductById(String id) {
         return productHashMap.get(id);
     }
 }

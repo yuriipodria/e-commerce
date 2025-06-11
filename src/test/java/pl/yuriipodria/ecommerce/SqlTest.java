@@ -10,6 +10,7 @@ import pl.yuriipodria.ecommerce.productcatalog.SqlProductStorage;
 import pl.yuriipodria.ecommerce.productcatalog.Product;
 import pl.yuriipodria.ecommerce.productcatalog.ProductStorage;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.HashMap;
@@ -17,7 +18,7 @@ import java.util.Map;
 import java.util.UUID;
 
 @SpringBootTest
-public class SqlProductStorageTest {
+public class SqlTest {
     @Autowired
     JdbcTemplate jdbcTemplate;
 

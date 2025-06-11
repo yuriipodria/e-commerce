@@ -1,4 +1,4 @@
-package pl.jkanclerz.ecommerce.catalog;
+package pl.yuriipodria.ecommerce.productcatalog;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +16,7 @@ public class HashMapProductStorageTest {
         var product = thereIsProduct();
         var productStorage = thereIsProductStorage();
 
-        productStorage.add(product);
+        productStorage.save(product);
 
         List<Product> products = productStorage.allProducts();
 
@@ -31,8 +31,8 @@ public class HashMapProductStorageTest {
         var product = thereIsProduct();
         var productStorage = thereIsProductStorage();
 
-        productStorage.add(product);
-        var loaded = productStorage.getProductBy(product.getId());
+        productStorage.save(product);
+        var loaded = productStorage.loadProductById(product.getId());
 
         assertThat(loaded.getId()).isEqualTo(product.getId());
     }
